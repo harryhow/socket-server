@@ -1,9 +1,14 @@
 const { WebSocketServer } = require('ws')
-const http = require('http')
+const https = require('https')
+const fs = require('fs');
 const uuidv4 = require('uuid').v4
 const url = require('url')
 
-const server = http.createServer()
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/river-on-tips.xyz/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/river-on-tips.xyz/fullchain.pem')
+};
+const server = https.createServer(options);
 const wsServer = new WebSocketServer({ server })
 
 const port = 8000
@@ -53,7 +58,7 @@ wsServer.on('connection', (connection, request) => {
   const uuid = uuidv4()
   connections[uuid] = connection
   users[uuid] = {
-    role: { },
+    role: { },  
     text: { }
   }
   connection.on('message', message => handleMessage(message, uuid));
