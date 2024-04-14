@@ -5,8 +5,8 @@ const uuidv4 = require('uuid').v4
 const url = require('url')
 
 const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/river-on-tips.xyz/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/river-on-tips.xyz/fullchain.pem')
+  key: fs.readFileSync('privkey.pem'),
+  cert: fs.readFileSync('fullchain.pem')
 };
 const server = https.createServer(options);
 const wsServer = new WebSocketServer({ server })
