@@ -38,6 +38,7 @@ const handleClose = uuid => {
   console.log(`Disconnected`)
   delete connections[uuid]
   delete users[uuid]
+  delete votes[uuid]
   broadcast()
 }
 
