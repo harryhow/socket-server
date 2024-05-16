@@ -29,6 +29,11 @@ const handleMessage = (message, uuid) => {
     votes[uuid] = user.text.selectedOptionIndex;
     currentIndex = jsonMessage.text.currentIndex;
   }
+  if (jsonMessage.text.showResult === false) {
+    Object.keys(votes).forEach((key) => {
+      votes[key] = null;
+    });
+  }
   broadcast()
 
   console.log(`Updated their updated text: ${JSON.stringify(user.text)}`)
